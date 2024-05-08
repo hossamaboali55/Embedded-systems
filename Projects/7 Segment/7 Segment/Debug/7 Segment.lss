@@ -1,0 +1,239 @@
+
+7 Segment.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000012a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  0000012a  0000019e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000001b2  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001e4  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000220  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000006a3  00000000  00000000  00000240  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005a2  00000000  00000000  000008e3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000299  00000000  00000000  00000e85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  00001120  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000328  00000000  00000000  00001154  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000141  00000000  00000000  0000147c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  000015bd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea e2       	ldi	r30, 0x2A	; 42
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 93 00 	jmp	0x126	; 0x126 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#include <util/delay.h>
+
+#define F_CPU 16000000UL // CPU Frequency 
+
+
+int main(void) {
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	cd b7       	in	r28, 0x3d	; 61
+  88:	de b7       	in	r29, 0x3e	; 62
+  8a:	64 97       	sbiw	r28, 0x14	; 20
+  8c:	0f b6       	in	r0, 0x3f	; 63
+  8e:	f8 94       	cli
+  90:	de bf       	out	0x3e, r29	; 62
+  92:	0f be       	out	0x3f, r0	; 63
+  94:	cd bf       	out	0x3d, r28	; 61
+	int number = 0; // Variable to store the displayed number
+	
+	// PORTA as output for 7-Segment display
+	DDRA = 0xFF;
+  96:	8f ef       	ldi	r24, 0xFF	; 255
+  98:	8a bb       	out	0x1a, r24	; 26
+	
+	//  PORTC6 as output for controlling common pin of 7-Segment
+	DDRC |= (1 << PC6);
+  9a:	84 b3       	in	r24, 0x14	; 20
+  9c:	80 64       	ori	r24, 0x40	; 64
+  9e:	84 bb       	out	0x14, r24	; 20
+	
+	// PORTD2 and PORTD3 as input with pull-up resistors for buttons
+	DDRD &= ~((1 << PD2) | (1 << PD3));
+  a0:	81 b3       	in	r24, 0x11	; 17
+  a2:	83 7f       	andi	r24, 0xF3	; 243
+  a4:	81 bb       	out	0x11, r24	; 17
+	PORTD |= ((1 << PD2) | (1 << PD3));
+  a6:	82 b3       	in	r24, 0x12	; 18
+  a8:	8c 60       	ori	r24, 0x0C	; 12
+  aa:	82 bb       	out	0x12, r24	; 18
+
+#define F_CPU 16000000UL // CPU Frequency 
+
+
+int main(void) {
+	int number = 0; // Variable to store the displayed number
+  ac:	20 e0       	ldi	r18, 0x00	; 0
+  ae:	30 e0       	ldi	r19, 0x00	; 0
+	DDRD &= ~((1 << PD2) | (1 << PD3));
+	PORTD |= ((1 << PD2) | (1 << PD3));
+	
+	while (1) {
+		// Check if button 1 is pressed
+		if (!(PIND & (1 << PD2))) {
+  b0:	82 99       	sbic	0x10, 2	; 16
+  b2:	0b c0       	rjmp	.+22     	; 0xca <main+0x48>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b4:	87 ea       	ldi	r24, 0xA7	; 167
+  b6:	91 e6       	ldi	r25, 0x61	; 97
+  b8:	01 97       	sbiw	r24, 0x01	; 1
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <main+0x36>
+  bc:	00 c0       	rjmp	.+0      	; 0xbe <main+0x3c>
+  be:	00 00       	nop
+			_delay_ms(100); // Button delay
+			
+			// Increment number if it's less than 9
+			if (number <9) {
+  c0:	29 30       	cpi	r18, 0x09	; 9
+  c2:	31 05       	cpc	r19, r1
+  c4:	14 f4       	brge	.+4      	; 0xca <main+0x48>
+				number++;
+  c6:	2f 5f       	subi	r18, 0xFF	; 255
+  c8:	3f 4f       	sbci	r19, 0xFF	; 255
+			}
+		}
+		
+		// Check if button 2 is pressed
+		if (!(PIND & (1 << PD3))) {
+  ca:	83 99       	sbic	0x10, 3	; 16
+  cc:	0b c0       	rjmp	.+22     	; 0xe4 <main+0x62>
+  ce:	87 ea       	ldi	r24, 0xA7	; 167
+  d0:	91 e6       	ldi	r25, 0x61	; 97
+  d2:	01 97       	sbiw	r24, 0x01	; 1
+  d4:	f1 f7       	brne	.-4      	; 0xd2 <main+0x50>
+  d6:	00 c0       	rjmp	.+0      	; 0xd8 <main+0x56>
+  d8:	00 00       	nop
+			_delay_ms(100); // Button  delay
+			
+			// Decrement number if it's greater than 0
+			if (number > 0) {
+  da:	12 16       	cp	r1, r18
+  dc:	13 06       	cpc	r1, r19
+  de:	14 f4       	brge	.+4      	; 0xe4 <main+0x62>
+				number--;
+  e0:	21 50       	subi	r18, 0x01	; 1
+  e2:	31 09       	sbc	r19, r1
+			}
+		}
+		
+		// Enable common pin of 7-Segment
+		PORTC |= (1 << PC6);
+  e4:	85 b3       	in	r24, 0x15	; 21
+  e6:	80 64       	ori	r24, 0x40	; 64
+  e8:	85 bb       	out	0x15, r24	; 21
+		
+		// Define 7-segment display patterns for numbers 0 to 9
+		int segments[10] = {0b00111111, 0b00000110, 0b01011011, 0b01001111, 0b01100110,
+  ea:	84 e1       	ldi	r24, 0x14	; 20
+  ec:	e0 e6       	ldi	r30, 0x60	; 96
+  ee:	f0 e0       	ldi	r31, 0x00	; 0
+  f0:	de 01       	movw	r26, r28
+  f2:	11 96       	adiw	r26, 0x01	; 1
+  f4:	01 90       	ld	r0, Z+
+  f6:	0d 92       	st	X+, r0
+  f8:	8a 95       	dec	r24
+  fa:	e1 f7       	brne	.-8      	; 0xf4 <main+0x72>
+		0b01101101, 0b01111101, 0b00000111, 0b01111111, 0b01101111};
+		
+		// Output the corresponding segment pattern to display the digit
+		PORTA = segments[number];
+  fc:	f9 01       	movw	r30, r18
+  fe:	ee 0f       	add	r30, r30
+ 100:	ff 1f       	adc	r31, r31
+ 102:	81 e0       	ldi	r24, 0x01	; 1
+ 104:	90 e0       	ldi	r25, 0x00	; 0
+ 106:	8c 0f       	add	r24, r28
+ 108:	9d 1f       	adc	r25, r29
+ 10a:	e8 0f       	add	r30, r24
+ 10c:	f9 1f       	adc	r31, r25
+ 10e:	80 81       	ld	r24, Z
+ 110:	8b bb       	out	0x1b, r24	; 27
+ 112:	89 e7       	ldi	r24, 0x79	; 121
+ 114:	9f e3       	ldi	r25, 0x3F	; 63
+ 116:	01 97       	sbiw	r24, 0x01	; 1
+ 118:	f1 f7       	brne	.-4      	; 0x116 <main+0x94>
+ 11a:	00 c0       	rjmp	.+0      	; 0x11c <main+0x9a>
+ 11c:	00 00       	nop
+		
+		// Delay to allow the display to be visible
+		_delay_ms(65);
+		
+		// Disable common pin of 7-Segment
+		PORTC &= ~(1 << PC6);
+ 11e:	85 b3       	in	r24, 0x15	; 21
+ 120:	8f 7b       	andi	r24, 0xBF	; 191
+ 122:	85 bb       	out	0x15, r24	; 21
+	}
+ 124:	c5 cf       	rjmp	.-118    	; 0xb0 <main+0x2e>
+
+00000126 <_exit>:
+ 126:	f8 94       	cli
+
+00000128 <__stop_program>:
+ 128:	ff cf       	rjmp	.-2      	; 0x128 <__stop_program>
